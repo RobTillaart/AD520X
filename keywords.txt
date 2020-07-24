@@ -1,0 +1,16 @@
+# Syntax Coloring Map For AD520X
+
+# Datatypes (KEYWORD1)
+AD520X	KEYWORD1
+AD5204	KEYWORD1
+AD5206	KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+begin	KEYWORD2
+setValue	KEYWORD2
+setAll	KEYWORD2
+getValue	KEYWORD2
+reset	KEYWORD2
+
+# Constants (LITERAL1)
+AD520X_LIB_VERSION	LITERAL1

@@ -2,21 +2,23 @@
 //    FILE: AD520X.cpp
 //  AUTHOR: Rob Tillaart
 //    DATE: 2020-07-24
-// VERSION: 0.0.1
-// PURPOSE: Arduino library for AD5204 and AD5206 igital potentiometers
+// VERSION: 0.0.2
+// PURPOSE: Arduino library for AD5204 and AD5206 digital potentiometers (also for AD8400, AD8402, AD8403)
 //     URL: https://github.com/RobTillaart/AD520X
 //
 // HISTORY:
 // 0.0.1    2020-07-24 initial version
-// 
+// 0.0.2    2020-07-25 support for AD8400 series in documentation.
 
 #include "AD520X.h"
+
 
 AD520X::AD520X(uint8_t reset)
 {
   _hwSPI = true;
   _reset = reset;
 }
+
 
 AD520X::AD520X(uint8_t data, uint8_t clock, uint8_t select, uint8_t reset)
 {
@@ -27,11 +29,14 @@ AD520X::AD520X(uint8_t data, uint8_t clock, uint8_t select, uint8_t reset)
   _reset = reset;
 }
 
+
 // initializes the SPI
 void AD520X::begin(uint8_t ports, uint8_t value)
 {
-  _ports = 6;
-  if (ports == 4) _ports = 4;
+  _ports = 6;                  // AD5206
+  if (ports == 4) _ports = 4;  // AD5204, AD8403
+  if (ports == 2) _ports = 2;  // AD8402
+  if (ports == 1) _ports = 1;  // AD8401
   if(_hwSPI)
   {
     SPI.begin();
@@ -54,12 +59,14 @@ void AD520X::begin(uint8_t ports, uint8_t value)
   setAll(value);
 }
 
+
 void AD520X::setValue(uint8_t idx, uint8_t value)
 {
   if (idx >= _ports) return;
   _value[idx] = value;
   updateDevice(idx);
 }
+
 
 void  AD520X::setAll(uint8_t value)
 {
@@ -69,11 +76,13 @@ void  AD520X::setAll(uint8_t value)
   }
 }
 
+
 uint8_t AD520X::getValue(uint8_t idx)
 {
   if (idx >= _ports) return 0;
   return _value[idx];
 }
+
 
 void AD520X::reset(uint8_t value)
 {
@@ -84,6 +93,7 @@ void AD520X::reset(uint8_t value)
   }
   setAll(value);
 }
+
 
 void AD520X::updateDevice(uint8_t idx)
 {
@@ -105,6 +115,7 @@ void AD520X::updateDevice(uint8_t idx)
   }
 }
 
+
 // simple one mode version
 void AD520X::swSPI_transfer(uint8_t value)
 {
@@ -117,4 +128,3 @@ void AD520X::swSPI_transfer(uint8_t value)
 }
 
 // -- END OF FILE --
-

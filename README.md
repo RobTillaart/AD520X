@@ -4,44 +4,51 @@ Arduino library for SPI AD5204 and AD5206 digital potentiometers
 
 ## Description
 
-The **AD5204** and **AD5206** are SPI based digital potentiometers.
-The **AD5204** has 4 ports and the **AD5206** has 6 ports.
+The library is still experimental as not all functionality is tested (enough).
 
-The interface is quite straightforward, check the example(s).
+The **AD5204** (4 pm) and **AD5206** (6 pm) are SPI based digital potentiometers.
+This library consists of a base class **AD520X** that does the work.
 
-_Although not tested this library should work for the older **AD8400** (single port),
-the **AD8402** (dual port) and **AD8403** (quad port) as the interface is very similar
+The interface is straightforward, one can set a value per pm between 0..255.
+
+_Although not tested this library should work for the older **AD8400** (1 pm),
+the **AD8402** (2 pm) and **AD8403** (4 pm) as the interface is very similar
 (datasheet comparison). If you can confirm it works, please let me know._
 
 ## Interface
 
-- **AD520X(reset = 255)** constructor using hardware SPI,  
-default = no reset pin = 255
-- **AD520X(data, clock, select, reset = 255)** constructor using software SPI  
-default = no reset pin = 255
-- **begin(ports = 6, value = 128)** ports = { 6, 4, 2, 1 } 
-value is the initial value of all potmeters.
-- **setValue(idx, value)** set a potmeter to a value
-- **setAll(value)** set all potmeters to same value e.g. 0 or max or mid
-- **getValue(idx)** returns the last set value.
-- **reset(value = 128)** resets all pins to the value postion, default 128.
+Derived classes, to be used are:
+- **AD5204(select, reset, shutdown, dataOut = 255, clock = 255)** uses 4 pm.
+- **AD5206(select, reset, shutdown, dataOut = 255, clock = 255)** uses 6 pm.
+- **AD8400(select, reset, shutdown, dataOut = 255, clock = 255)** uses 1 pm.
+- **AD8402(select, reset, shutdown, dataOut = 255, clock = 255)** uses 2 pm.
+- **AD8403(select, reset, shutdown, dataOut = 255, clock = 255)** uses 4 pm.
 
-Constructors are also available for 
-- **AD5204()** and **AD5206()**
-- **AD8400()** **AD8402()** and **AD8403()**.
+Base class, not to be used directly.
+- **AD520X(select, reset, shutdown, dataOut = 255, clock = 255)** constructor  
+If dataOut and clock are set to 255 (default) it uses hardware SPI. 
+If dataOut and clock are set to another (valid) value) it uses software SPI.
+reset and shutdown may be set to 255 too, which effectively disables them.  
+Note: hardware SPI is 10+ times faster on an UNO.
+- **begin(value = 128)** value is the initial value of all potentiometer.
+- **setValue(pm, value)** set a potentiometer to a value
+- **setAll(value)** set all potentiometers to the same value e.g. 0 or max or mid
+- **getValue(pm)** returns the last set value of a specific potmeter
+- **reset(value = 128)** resets all potentiometers to value, default 128.
+- **powerOn()** switches the module on
+- **powerDown()** switches the module off
 
-These classes are 100% identical, no specifics for now.
 
 ## Future
 
-- powerOn() powerOff() - shutdown pin
-- invert flag per potmeter? 0..255 -> 255..0  
-- logarithmic effect? gamma function?
-
-- follow(pinB, pinA, percentage = 100)  
-makes pinB follow pin A unless pinB is addressed explicitly  
-array cascade = 0xFF or pinA.  
-It will follow pinA for certain percentage default 100.
+- invert flag per potmeter? 0..255 -> 255..0
+  - a single uint8_t can hold 8 flags
+- logarithmic effect? setGamma(pm, value);
+- follow(pm_B, pm_A, percentage = 100)
+  - makes pm_B follow pm_A unless pm_B is addressed explicitly
+  - array cascade = 0xFF or pm_A.
+  - It will follow pm_A for certain percentage default 100.
+- set/getPercentage() interface (wrappers \* constant)
 
 ## Operations
 

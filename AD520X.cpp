@@ -2,41 +2,40 @@
 //    FILE: AD520X.cpp
 //  AUTHOR: Rob Tillaart
 //    DATE: 2020-07-24
-// VERSION: 0.0.2
-// PURPOSE: Arduino library for AD5204 and AD5206 digital potentiometers (also for AD8400, AD8402, AD8403)
+// VERSION: 0.1.0
+// PURPOSE: Arduino library for AD5204 and AD5206 digital potentiometers (+ older AD8400, AD8402, AD8403)
 //     URL: https://github.com/RobTillaart/AD520X
 //
 // HISTORY:
 // 0.0.1    2020-07-24 initial version
 // 0.0.2    2020-07-25 support for AD8400 series in documentation.
+// 0.1.0    2020-07-26 refactor, fix #2 select pin for HW SPI; add shutdown.
+
 
 #include "AD520X.h"
 
 
-AD520X::AD520X(uint8_t reset)
+AD520X::AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
 {
-  _hwSPI = true;
-  _reset = reset;
+  _pmCount  = 6;
+  _select   = select;
+  _data     = dataOut;
+  _clock    = clock;
+  _reset    = reset;
+  _shutdown = shutdown;
+  _hwSPI    = (dataOut == 255) && (clock == 255);
 }
 
-
-AD520X::AD520X(uint8_t data, uint8_t clock, uint8_t select, uint8_t reset)
+// initializes the pins and starts SPI in case of hardware SPI
+void AD520X::begin(uint8_t value)
 {
-  _hwSPI = false;
-  _data = data;
-  _clock = clock;
-  _select = select;
-  _reset = reset;
-}
+  pinMode(_select, OUTPUT);
+  digitalWrite(_select, HIGH);
+  pinMode(_reset, OUTPUT);
+  digitalWrite(_reset, LOW);
+  pinMode(_shutdown, OUTPUT);
+  digitalWrite(_shutdown, LOW);
 
-
-// initializes the SPI
-void AD520X::begin(uint8_t ports, uint8_t value)
-{
-  _ports = 6;                  // AD5206
-  if (ports == 4) _ports = 4;  // AD5204, AD8403
-  if (ports == 2) _ports = 2;  // AD8402
-  if (ports == 1) _ports = 1;  // AD8401
   if(_hwSPI)
   {
     SPI.begin();
@@ -46,75 +45,60 @@ void AD520X::begin(uint8_t ports, uint8_t value)
   {
     pinMode(_data, OUTPUT);
     pinMode(_clock, OUTPUT);
-    pinMode(_select, OUTPUT);
-    digitalWrite(_select, HIGH);
     digitalWrite(_data, LOW);
     digitalWrite(_clock, LOW);
   }
-  if (_reset != 255)
-  {
-    pinMode(_reset, OUTPUT);
-    digitalWrite(_reset, LOW);
-  }
+
   setAll(value);
 }
 
-
-void AD520X::setValue(uint8_t idx, uint8_t value)
+void AD520X::setValue(uint8_t pm, uint8_t value)
 {
-  if (idx >= _ports) return;
-  _value[idx] = value;
-  updateDevice(idx);
+  if (pm >= _pmCount) return;
+  _value[pm] = value;
+  updateDevice(pm);
 }
-
 
 void  AD520X::setAll(uint8_t value)
 {
-  for (uint8_t p = 0; p < _ports; p++)
+  for (uint8_t pm = 0; pm < _pmCount; pm++)
   {
-    setValue(p, value);
+    setValue(pm, value);
   }
 }
 
-
-uint8_t AD520X::getValue(uint8_t idx)
+uint8_t AD520X::getValue(uint8_t pm)
 {
-  if (idx >= _ports) return 0;
-  return _value[idx];
+  if (pm >= _pmCount) return 0;
+  return _value[pm];
 }
-
 
 void AD520X::reset(uint8_t value)
 {
-  if (_reset != 255)
-  {
-    digitalWrite(_reset, HIGH);
-    digitalWrite(_reset, LOW);
-  }
+  digitalWrite(_reset, HIGH);
+  digitalWrite(_reset, LOW);
   setAll(value);
 }
 
-
-void AD520X::updateDevice(uint8_t idx)
+void AD520X::updateDevice(uint8_t pm)
 {
   if (_hwSPI)
   {
     SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE1));
     digitalWrite(_select, LOW);
-    SPI.transfer(idx);
-    SPI.transfer(_value[idx]);
+    SPI.transfer(pm);
+    SPI.transfer(_value[pm]);
     digitalWrite(_select, HIGH);
     SPI.endTransaction();
   }
   else // Software SPI
   {
     digitalWrite(_select, LOW);
-    swSPI_transfer(idx);
-    swSPI_transfer(_value[idx]);
+    swSPI_transfer(pm);
+    swSPI_transfer(_value[pm]);
     digitalWrite(_select, HIGH);
   }
 }
-
 
 // simple one mode version
 void AD520X::swSPI_transfer(uint8_t value)
@@ -125,6 +109,39 @@ void AD520X::swSPI_transfer(uint8_t value)
     digitalWrite(_clock, HIGH);
     digitalWrite(_clock, LOW);
   }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+AD5206::AD5206(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
+             : AD520X(select, reset, shutdown, dataOut, clock)
+{
+  _pmCount = 6;
+}
+
+AD5204::AD5204(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
+             : AD520X(select, reset, shutdown, dataOut, clock)
+{
+  _pmCount = 4;
+}
+
+AD8403::AD8403(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
+             : AD520X(select, reset, shutdown, dataOut, clock)
+{
+  _pmCount = 4;
+}
+
+AD8402::AD8402(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
+             : AD520X(select, reset, shutdown, dataOut, clock)
+{
+  _pmCount = 2;
+}
+
+AD8400::AD8400(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
+             : AD520X(select, reset, shutdown, dataOut, clock)
+{
+  _pmCount = 1;
 }
 
 // -- END OF FILE --

@@ -12,7 +12,9 @@ uint32_t start, stop;
 
 #define TWOPI    (3.14159265 * 2)
 
-AD5204 pot;
+// select, reset, shutdown, data, clock
+// AD5204 pot(10, 255, 255, 8, 9);  // SW SPI
+AD5204 pot = AD5204(10, 12, 13);     // HW SPI
 
 void setup()
 {
@@ -24,7 +26,6 @@ void setup()
   test_sinus();
   test_sawtooth();
   test_timing();
-
 
   Serial.println("\nDone...");
 }
@@ -91,6 +92,20 @@ void test_timing()
   }
   stop = micros();
   Serial.print("1000 x setAll():\t");
+  Serial.println(stop - start);
+  delay(10);
+
+  volatile int x = 0;
+  start = micros();
+  for (int i = 0; i < 250; i++)
+  {
+    x += pot.getValue(0);
+    x += pot.getValue(1);
+    x += pot.getValue(2);
+    x += pot.getValue(3);
+  }
+  stop = micros();
+  Serial.print("1000 x getValue():\t");
   Serial.println(stop - start);
   delay(10);
 

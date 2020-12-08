@@ -2,7 +2,7 @@
 //    FILE: AD520X.cpp
 //  AUTHOR: Rob Tillaart
 //    DATE: 2020-07-24
-// VERSION: 0.1.0
+// VERSION: 0.1.1
 // PURPOSE: Arduino library for AD5204 and AD5206 digital potentiometers (+ older AD8400, AD8402, AD8403)
 //     URL: https://github.com/RobTillaart/AD520X
 //
@@ -10,6 +10,7 @@
 // 0.0.1    2020-07-24 initial version
 // 0.0.2    2020-07-25 support for AD8400 series in documentation.
 // 0.1.0    2020-07-26 refactor, fix #2 select pin for HW SPI; add shutdown.
+// 0.1.1    2020-12-08 Arduino-CI + unit test + isPowerOn()
 
 
 #include "AD520X.h"

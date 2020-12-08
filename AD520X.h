@@ -3,7 +3,7 @@
 //    FILE: AD520X.h
 //  AUTHOR: Rob Tillaart
 //    DATE: 2020-07-24
-// VERSION: 0.1.0
+// VERSION: 0.1.1
 // PURPOSE: Arduino library for AD5204 and AD5206 digital potentiometers (+ older AD8400, AD8402, AD8403)
 //     URL: https://github.com/RobTillaart/AD520X
 //
@@ -14,7 +14,7 @@
 #include "Arduino.h"
 #include "SPI.h"
 
-#define AD520X_LIB_VERSION   "0.1.0"
+#define AD520X_LIB_VERSION   "0.1.1"
 
 class AD520X
 {
@@ -27,8 +27,13 @@ public:
   uint8_t  getValue(uint8_t pm);
 
   void     reset(uint8_t value = 128);
+  int      pmCount()   { return _pmCount; };
+
   void     powerOn()   { digitalWrite(_shutdown, LOW); };
-  void     powerDown() { digitalWrite(_shutdown, HIGH); };
+  void     powerOff()  { digitalWrite(_shutdown, HIGH); };
+  void     powerDown() { powerOff(); };      // will become obsolete 
+  bool     isPowerOn() { return digitalRead(_shutdown) == LOW; };
+
 
 protected:
   uint8_t _data;

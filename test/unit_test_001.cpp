@@ -46,13 +46,13 @@ unittest(test_begin)
 
 unittest(test_setValue)
 {
-  AD5206 pot = AD5204(10, 12, 13);  // HW SPI
+  AD5206 pot = AD5206(10, 12, 13);  // HW SPI
   pot.begin();
-  assertEqual(128, pot.getValue());
+  assertEqual(128, pot.getValue(0));
 
   for (int i = 0; i < pot.pmCount(); i++)
   {
-    pot.setValue(35);
+    pot.setValue(i, 35);
     assertEqual(35, pot.getValue(i));
   }
 

@@ -31,7 +31,7 @@ public:
 
   void     powerOn()   { digitalWrite(_shutdown, LOW); };
   void     powerDown() { digitalWrite(_shutdown, HIGH); };
-  bool     isPowerOn() { digitalRead(_shutdown) == LOW); };
+  bool     isPowerOn() { digitalRead(_shutdown) == LOW; };
 
 
 protected:

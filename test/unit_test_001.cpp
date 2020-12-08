@@ -37,17 +37,17 @@ unittest_teardown()
 unittest(test_begin)
 {
   AD5204 pot = AD5204(10, 12, 13);  // HW SPI
-  pot.begin()
+  pot.begin();
   assertEqual(128, pot.getValue(0));
 
-  pot.begin(42)
+  pot.begin(42);
   assertEqual(42, pot.getValue(0));
 }
 
 unittest(test_setValue)
 {
   AD5206 pot = AD5204(10, 12, 13);  // HW SPI
-  pot.begin()
+  pot.begin();
   assertEqual(128, pot.getValue());
 
   for (int i = 0; i < pot.pmCount(); i++)
@@ -67,7 +67,7 @@ unittest(test_setValue)
 unittest(test_reset)
 {
   AD5204 pot = AD5204(10, 12, 13);  // HW SPI
-  pot.begin()
+  pot.begin();
   assertEqual(128, pot.getValue(0));
   
   pot.reset(35);
@@ -78,7 +78,7 @@ unittest(test_reset)
 unittest(test_power)
 {
   AD5204 pot = AD5204(10, 12, 13);  // HW SPI
-  pot.begin(213)
+  pot.begin(213);
   assertEqual(213, pot.getValue(0));
   assertTrue(pot.isPowerOn());
 
@@ -100,23 +100,23 @@ unittest(test_power)
 unittest(test_pm_count)
 {
   AD5204 pot1 = AD5204(10, 12, 13);  // HW SPI
-  pot1.begin()
+  pot1.begin();
   assertEqual(4, pot1.pmCount());
 
   AD5206 pot2 = AD5206(10, 12, 13);  // HW SPI
-  pot2.begin()
+  pot2.begin();
   assertEqual(6, pot2.pmCount());
 
   AD8403 pot3 = AD8403(10, 12, 13);  // HW SPI
-  pot3.begin()
+  pot3.begin();
   assertEqual(4, pot3.pmCount());
 
   AD8402 pot4 = AD8402(10, 12, 13);  // HW SPI
-  pot4.begin()
+  pot4.begin();
   assertEqual(2, pot4.pmCount());
 
   AD8400 pot5 = AD8400(10, 12, 13);  // HW SPI
-  pot5.begin()
+  pot5.begin();
   assertEqual(1, pot5.pmCount());
 }
 

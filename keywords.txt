@@ -15,6 +15,7 @@ setAll	KEYWORD2
 getValue	KEYWORD2
 reset	KEYWORD2
 powerOn	KEYWORD2
+powerOff	KEYWORD2
 powerDown	KEYWORD2
 isPowerOn	KEYWORD2
 

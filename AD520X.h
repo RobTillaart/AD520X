@@ -30,7 +30,8 @@ public:
   int      pmCount()   { return _pmCount; };
 
   void     powerOn()   { digitalWrite(_shutdown, LOW); };
-  void     powerDown() { digitalWrite(_shutdown, HIGH); };
+  void     powerOff()  { digitalWrite(_shutdown, HIGH); };
+  void     powerDown() { powerOff(); };      // will become obsolete 
   bool     isPowerOn() { return digitalRead(_shutdown) == LOW; };
 
 

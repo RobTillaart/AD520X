@@ -1,3 +1,4 @@
+
 [![Arduino CI](https://github.com/RobTillaart/AD520X/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/AD520X/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/RobTillaart/AD520X.svg?maxAge=3600)](https://github.com/RobTillaart/AD520X/releases)
@@ -46,7 +47,8 @@ Note: hardware SPI is 10+ times faster on an UNO.
 ### Misc
 - **pmCount()** returns the number of internal potmeters.
 - **powerOn()** switches the module on
-- **powerDown()** switches the module off
+- **powerOff()** switches the module off
+- **powerDown()** use powerOFf() instead
 - **isPowerOn()** returns true if on (default) or 
 
 ## Future
@@ -65,7 +67,6 @@ Note: hardware SPI is 10+ times faster on an UNO.
 - **getPercentage(pm)**
 - logarithmic effect? setGamma(pm, value);
   easier with setPercentage()
-
 
 
 ## Operations

@@ -16,9 +16,19 @@ This library consists of a base class **AD520X** that does the work.
 
 The interface is straightforward, one can set a value per pm between 0..255.
 
+| type   | # channels |
+|:-------|:----------:|
+| AD5204 |  4         |
+| AD5206 |  6         |
+| AD8400 |  1         |
+| AD8402 |  2         |
+| AD8403 |  4         |
+
+
 _Although not tested this library should work for the older **AD8400** (1 pm),
 the **AD8402** (2 pm) and **AD8403** (4 pm) as the interface is very similar
 (datasheet comparison). If you can confirm it works, please let me know._
+
 
 ## Interface
 
@@ -41,6 +51,7 @@ Note: hardware SPI is 10+ times faster on an UNO.
 
 
 ### Base
+
 - **void begin(uint8_t value = 128)** value is the initial value of all potentiometer.
 - **void setValue(uint8_t pm, uint8_t value)** set a potentiometer to a value
 - **void setAll(uint8_t value)** set all potentiometers to the same value e.g. 0 or max or mid
@@ -104,6 +115,7 @@ Easier than resoldering.
 
 - **void follow(pm_B, pm_A, float percentage = 100)**
   - makes pm_B follow pm_A unless pm_B is addressed explicitly
+  - e.g. to be used for stereo channels.
   - array cascade = 0xFF or pm_A.
   - It will follow pm_A for certain percentage default 100.
 - **void setGamma(uint8_t pm, float gamma)**

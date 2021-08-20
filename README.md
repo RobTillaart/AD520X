@@ -7,6 +7,8 @@
 
 Arduino library for SPI AD5204 and AD5206 digital potentiometers
 
+Should work for the AD840x series too (not tested). 
+
 ## Description
 
 The library is still experimental as not all functionality is tested (enough).

@@ -17,10 +17,10 @@ Should work for the AD840x series too (not tested).
 
 The library is still experimental as not all functionality is tested (enough).
 
-The **AD5204** (4 potentiometer) and **AD5206** (6 potentiometer) are SPI based digital potentiometers.
+The **AD5204** (4 channels) and **AD5206** (6 channels) are SPI based digital potentiometers.
 This library consists of a base class **AD520X** that does the work.
 
-The interface is straightforward, one can set a value per potentiometer between 0..255.
+The interface is straightforward, one can set a value per channels between 0..255.
 
 | type   | # channels |
 |:-------|:----------:|
@@ -31,8 +31,8 @@ The interface is straightforward, one can set a value per potentiometer between 
 | AD8403 |  4         |
 
 
-_Although not tested this library should work for the older **AD8400** (1 potentiometer),
-the **AD8402** (2 potentiometer) and **AD8403** (4 potentiometer) as the interface is very similar
+_Although not tested this library should work for the older **AD8400** (1 channel),
+the **AD8402** (2 channels) and **AD8403** (4 channels) as the interface is very similar
 (datasheet comparison). If you can confirm it works, please let me know._
 
 
@@ -46,18 +46,18 @@ Base class, not to be used directly.
 If dataOut and clock are set to 255 (default) it uses hardware SPI. 
 If dataOut and clock are set to another (valid) value) it uses software SPI.
 reset and shutdown may be set to 255 too, which effectively disables them.  
-- **AD5204(select, reset, shutdown, dataOut = 255, clock = 255)** uses 4 pm.
-- **AD5206(select, reset, shutdown, dataOut = 255, clock = 255)** uses 6 pm.
-- **AD8400(select, reset, shutdown, dataOut = 255, clock = 255)** uses 1 pm.
-- **AD8402(select, reset, shutdown, dataOut = 255, clock = 255)** uses 2 pm.
-- **AD8403(select, reset, shutdown, dataOut = 255, clock = 255)** uses 4 pm.
+- **AD5204(select, reset, shutdown, dataOut = 255, clock = 255)** has 4 channels.
+- **AD5206(select, reset, shutdown, dataOut = 255, clock = 255)** has 6 channels.
+- **AD8400(select, reset, shutdown, dataOut = 255, clock = 255)** has 1 channel.
+- **AD8402(select, reset, shutdown, dataOut = 255, clock = 255)** has 2 channels.
+- **AD8403(select, reset, shutdown, dataOut = 255, clock = 255)** has 4 channels.
 
 Note: hardware SPI is 10+ times faster on an UNO.
 
 
 ### Base
 
-Since 0.2.0 the functions have more default parameters. Potmeter is default pot 0 
+Since 0.2.0 the functions have more default parameters. Potentiometer is default pot 0 
 and value is default the middle value of 128. 
 
 - **void begin(uint8_t value = 128)** value is the initial value of all potentiometer.
@@ -67,14 +67,15 @@ Returns true if successful, false if not.
 - **void setAll(uint8_t value)** set all potentiometers to the same value e.g. 0 or max or mid value.
 - **uint8_t getValue(uint8_t pm = 0)** returns the last set value of a specific potentiometer.
 - **void reset(uint8_t value = 128)** resets all potentiometers to value, default 128.
-- **bool setPercentage(uint8_t pm = 0, float percentage = 50)** same as setValue, now from 0..100%  
+- **bool setPercentage(uint8_t pm = 0, float percentage = 50)** similar to setValue, percentage from 0..100%  
 Returns true when successful, false if not.
-- **float getPercentage(uint8_t pm = 0)** return value as percentage.
+- **float getPercentage(uint8_t pm = 0)** return the value of potentiometer pm as percentage.
 
 
 ### Hardware SPI
 
-To be used only if one needs a specific speed for hardware SPI.
+To be used only if one needs a specific speed for hardware SPI.  
+Has no effect on software SPI.
 
 - **void setSPIspeed(uint32_t speed)** set SPI transfer rate.
 - **uint32_t getSPIspeed()** returns SPI transfer rate.
@@ -90,8 +91,7 @@ in the future.
 - **bool usesHSPI()** returns true if HSPI is used.
 - **bool usesVSPI()** returns true if VSPI is used.
 
-The **selectVSPI()** or the **selectHSPI()** needs to be called 
-BEFORE the **begin()** function.
+The **selectVSPI()** or the **selectHSPI()** needs to be called BEFORE the **begin()** function.
 
 
 ### Misc
@@ -105,7 +105,7 @@ BEFORE the **begin()** function.
 
 ## Future
 
-- **void setInvert(uint8_t pm)** invert flag per potentiometer. Easier than re-soldering.
+- **void setInvert(uint8_t pm)** invert flag per potentiometer.
    - 0..255 -> 255..0
    - 1 uint8_t can hold 8 flags
 - **bool getInvert(uint8_t pm)**

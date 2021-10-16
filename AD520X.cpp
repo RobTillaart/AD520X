@@ -122,7 +122,7 @@ uint8_t AD520X::getValue(uint8_t pm)
 bool AD520X::setPercentage(uint8_t pm, float percentage)
 {
   if ((percentage < 0) || (percentage > 100.0)) return false;
-  return setValue(pm, round(percentage * 2.55));
+  return setValue(pm, round(percentage * (255.0 / 100.0)));
 }
 
 
@@ -131,7 +131,7 @@ float AD520X::getPercentage(uint8_t pm)
   if (pm >= _pmCount) return 0;
   uint8_t v = _value[pm];
   if (v == 0) return 0.0;
-  return (100.0 / 255) * v;
+  return (100.0 / 255.0) * v;
 }
 
 

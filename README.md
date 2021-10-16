@@ -17,10 +17,10 @@ Should work for the AD840x series too (not tested).
 
 The library is still experimental as not all functionality is tested (enough).
 
-The **AD5204** (4 pm) and **AD5206** (6 pm) are SPI based digital potentiometers.
+The **AD5204** (4 potentiometer) and **AD5206** (6 potentiometer) are SPI based digital potentiometers.
 This library consists of a base class **AD520X** that does the work.
 
-The interface is straightforward, one can set a value per pm between 0..255.
+The interface is straightforward, one can set a value per potentiometer between 0..255.
 
 | type   | # channels |
 |:-------|:----------:|
@@ -31,8 +31,8 @@ The interface is straightforward, one can set a value per pm between 0..255.
 | AD8403 |  4         |
 
 
-_Although not tested this library should work for the older **AD8400** (1 pm),
-the **AD8402** (2 pm) and **AD8403** (4 pm) as the interface is very similar
+_Although not tested this library should work for the older **AD8400** (1 potentiometer),
+the **AD8402** (2 potentiometer) and **AD8403** (4 potentiometer) as the interface is very similar
 (datasheet comparison). If you can confirm it works, please let me know._
 
 
@@ -40,8 +40,6 @@ the **AD8402** (2 pm) and **AD8403** (4 pm) as the interface is very similar
 
 
 ### Constructors
-
-All pins are type uint8_t 
 
 - **AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut = 255, uint8_t clock = 255)** constructor  
 Base class, not to be used directly.
@@ -107,19 +105,10 @@ BEFORE the **begin()** function.
 
 ## Future
 
-
-### should
-
-Easier than re-soldering.
-
-- **void setInvert(uint8_t pm)** invert flag per potentiometer
+- **void setInvert(uint8_t pm)** invert flag per potentiometer. Easier than re-soldering.
    - 0..255 -> 255..0
    - 1 uint8_t can hold 8 flags
 - **bool getInvert(uint8_t pm)**
-
-
-### could
-
 - **void follow(pm_B, pm_A, float percentage = 100)**
   - makes pm_B follow pm_A unless pm_B is addressed explicitly
   - e.g. to be used for stereo channels.

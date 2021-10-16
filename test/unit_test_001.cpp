@@ -73,7 +73,7 @@ unittest(test_setPercentage)
 {
   AD5206 pot = AD5206(10, 12, 13);  // HW SPI
   pot.begin();
-  assertEqualFloat(50, pot.getPercentage(0), 0.01);
+  assertEqualFloat(50, pot.getPercentage(0), 0.5);
 
   for (int i = 0; i < pot.pmCount(); i++)
   {

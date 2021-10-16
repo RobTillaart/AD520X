@@ -25,11 +25,11 @@ public:
   AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock);  
 
   void     begin(uint8_t value = 128);
-  void     setValue(uint8_t pm = 0, uint8_t value = 128);
+  bool     setValue(uint8_t pm = 0, uint8_t value = 128);
   void     setAll(uint8_t value);
   uint8_t  getValue(uint8_t pm = 0);
 
-  void     setPercentage(uint8_t pm = 0, float percentage = 50);
+  bool     setPercentage(uint8_t pm = 0, float percentage = 50);
   float    getPercentage(uint8_t pm = 0);
 
   void     reset(uint8_t value = 128);

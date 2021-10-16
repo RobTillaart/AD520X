@@ -94,11 +94,12 @@ void AD520X::setGPIOpins(uint8_t clk, uint8_t miso, uint8_t mosi, uint8_t select
 #endif
 
 
-void AD520X::setValue(uint8_t pm, uint8_t value)
+bool AD520X::setValue(uint8_t pm, uint8_t value)
 {
-  if (pm >= _pmCount) return;
+  if (pm >= _pmCount) return false;
   _value[pm] = value;
   updateDevice(pm);
+  return true;
 }
 
 
@@ -118,10 +119,10 @@ uint8_t AD520X::getValue(uint8_t pm)
 }
 
 
-void AD520X::setPercentage(uint8_t pm, float percentage)
+bool AD520X::setPercentage(uint8_t pm, float percentage)
 {
-  if ((percentage < 0) || (percentage > 100.0)) return;
-  setValue(pm, round(percentage * 2.55));
+  if ((percentage < 0) || (percentage > 100.0)) return false;
+  return setValue(pm, round(percentage * 2.55));
 }
 
 

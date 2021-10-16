@@ -67,10 +67,10 @@ unittest(test_setValue)
     assertEqual(42, pot.getValue(i));
   }
 
-  assertFalse(pot.setValue(6, 10);
+  assertFalse(pot.setValue(6, 10));
 
   AD8400 p84 = AD8400(10, 12, 13);
-  assertFalse(pot.setValue(1, 117);
+  assertFalse(pot.setValue(1, 117));
 }
 
 

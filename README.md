@@ -59,14 +59,18 @@ Note: hardware SPI is 10+ times faster on an UNO.
 
 ### Base
 
-Since 0.2.0 the functions have more default parameters.
+Since 0.2.0 the functions have more default parameters. Potmeter is default pot 0 
+and value is default the middle value of 128. 
 
 - **void begin(uint8_t value = 128)** value is the initial value of all potentiometer.
-- **void setValue(uint8_t pm = 0, uint8_t value = 128)** set a potentiometer to a value. Defaults
+- **bool setValue(uint8_t pm = 0, uint8_t value = 128)** set a potentiometer to a value. 
+Default value is middle value.  
+Returns true if successful, false if not.
 - **void setAll(uint8_t value)** set all potentiometers to the same value e.g. 0 or max or mid value.
 - **uint8_t getValue(uint8_t pm = 0)** returns the last set value of a specific potentiometer.
 - **void reset(uint8_t value = 128)** resets all potentiometers to value, default 128.
-- **void setPercentage(uint8_t pm = 0, float percentage = 50)** same as setValue, now from 0..100%
+- **bool setPercentage(uint8_t pm = 0, float percentage = 50)** same as setValue, now from 0..100%  
+Returns true when successful, false if not.
 - **float getPercentage(uint8_t pm = 0)** return value as percentage.
 
 
@@ -124,6 +128,7 @@ Easier than re-soldering.
 - **void setGamma(uint8_t pm, float gamma)**
   - logarithmic effect? easier with setPercentage()
   - see gamma library.
+- **middle value** 127 ?
 
 
 ## Operations

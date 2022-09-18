@@ -22,18 +22,17 @@ This library consists of a base class **AD520X** that does the work.
 
 The interface is straightforward, one can set a value per channels between 0..255.
 
-|  type    |  channels  |  1 kΩ | 10 kΩ | 50 kΩ | 100 kΩ |
-|:---------|:----------:|:-----:|:-----:|:-----:|:------:|
-|  AD5204  |    4       |       |   V   |   V   |   V    |
-|  AD5206  |    6       |       |   V   |   V   |   V    |
-|  AD8400  |    1       |   V   |   V   |   V   |   V    |
+|  type    |  channels  |  1 kΩ | 10 kΩ | 50 kΩ | 100 kΩ |  works    |
+|:---------|:----------:|:-----:|:-----:|:-----:|:------:|:----------|
+|  AD5204  |    4       |       |   V   |   V   |   V    | confirmed |
+|  AD5206  |    6       |       |   V   |   V   |   V    | confirmed |
+|  AD8400  |    1       |   V   |   V   |   V   |   V    | confirmed |
 |  AD8402  |    2       |   V   |   V   |   V   |   V    |
 |  AD8403  |    4       |   V   |   V   |   V   |   V    |
 
+The library is not yet confirmed to work for **AD8402** (2 channels) and **AD8403** (4 channels).
+These devices have  a very similar interface (datasheet comparison) so it should work.
 
-_Although not tested this library should work with the older **AD8400** (1 channel),
-the **AD8402** (2 channels) and **AD8403** (4 channels) as the interface is very similar
-(datasheet comparison). 
 If you can confirm these models works, please let me know._
 
 

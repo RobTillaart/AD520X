@@ -143,21 +143,26 @@ See examples.
    - how does this work with **stereo** functions.
    - at what level should invert work.
 - **bool getInvert(uint8_t pm)**
+- **setGroupValue(mask, value)** bitmask to set 0..8 channels in one call
+  - loop over mask ?
+- **setGroupPercentage(mask, value)** bitmask to set 0..8 channels in one call
+  - wrapper 
 
 #### Could
 
-- **void follow(pm_B, pm_A, float percentage = 100)**
-  - makes pm_B follow pm_A unless pm_B is addressed explicitly
-  - e.g. to be used for **stereo** channels.
-  - array cascade = 0xFF or pm_A.
-  - It will follow pm_A for certain percentage default 100.
 - **AD520X_MIDDLE_VALUE** 127 ?
 - **setSWSPIdelay()** to tune software SPI?
   - only if requested.
 
 #### Wont
 
+
 - **void setGamma(uint8_t pm, float gamma)**
   - logarithmic effect? easier with setPercentage()
   - see gamma library.
+- **void follow(pm_B, pm_A, float percentage = 100)**
+  - makes pm_B follow pm_A unless pm_B is addressed explicitly
+  - e.g. to be used for **stereo** channels.
+  - array cascade = 0xFF or pm_A.
+  - It will follow pm_A for certain percentage default 100.
 

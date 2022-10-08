@@ -50,10 +50,10 @@ public:
   uint8_t  pmCount()   { return _pmCount; };
 
 
-  void     powerOn()   { digitalWrite(_shutdown, LOW); };
-  void     powerOff()  { digitalWrite(_shutdown, HIGH); };
+  void     powerOn()   { digitalWrite(_shutdown, HIGH); };
+  void     powerOff()  { digitalWrite(_shutdown, LOW); };
   void     powerDown() { powerOff(); };             // obsolete, remove in 0.3.0
-  bool     isPowerOn() { return digitalRead(_shutdown) == LOW; };
+  bool     isPowerOn() { return digitalRead(_shutdown) == HIGH; };
 
 
   //       speed in Hz

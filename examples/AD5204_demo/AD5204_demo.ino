@@ -47,7 +47,7 @@ void test_sinus()
   uint32_t i = 0;
   while (millis() - start < 10000)
   {
-    uint8_t value = 127 * sin(i * TWO_PI / 100);
+    int8_t value = 127 * sin(i * TWO_PI / 100);
     pot.setValue(0, 128 + value);
     pot.setValue(1, 128 + value / 2);
     pot.setValue(2, 64  + value / 2);

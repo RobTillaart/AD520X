@@ -47,11 +47,11 @@ void AD520X::begin(uint8_t value)
   pinMode(_select, OUTPUT);
   digitalWrite(_select, HIGH);
   pinMode(_reset, OUTPUT);
-  digitalWrite(_reset, LOW);
+  digitalWrite(_reset, HIGH);
   pinMode(_shutdown, OUTPUT);
-  digitalWrite(_shutdown, LOW);
+  digitalWrite(_shutdown, HIGH);
 
-  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE1);
+  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE0);
 
   if(_hwSPI)
   {
@@ -165,8 +165,8 @@ float AD520X::getPercentage(uint8_t pm)
 
 void AD520X::reset(uint8_t value)
 {
-  digitalWrite(_reset, HIGH);
   digitalWrite(_reset, LOW);
+  digitalWrite(_reset, HIGH);
   setAll(value);
 }
 
@@ -174,7 +174,7 @@ void AD520X::reset(uint8_t value)
 void AD520X::setSPIspeed(uint32_t speed)
 {
   _SPIspeed = speed;
-  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE1);
+  _spi_settings = SPISettings(_SPIspeed, MSBFIRST, SPI_MODE0);
 };
 
 

@@ -23,7 +23,10 @@
 //  0.2.2   2022-09-19  update readme.md
 //                      add "stereo functions" for setting 2 channels in one call
 //                      setValue() and setPercentage()
-//                      performance update
+//                      performance update.
+//
+//  0.3.0   2022-10-12  Fix 13, 14 wrong SPI mode. (kudos to Ale11Re)
+//                      Add RP2040 support to build-CI.
 
 
 #include "AD520X.h"

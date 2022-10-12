@@ -28,7 +28,7 @@ The interface is straightforward, one can set a value per channels between 0..25
 |  AD5206  |    6       |       |   V   |   V   |   V    | confirmed |
 |  AD8400  |    1       |   V   |   V   |   V   |   V    | confirmed |
 |  AD8402  |    2       |   V   |   V   |   V   |   V    |
-|  AD8403  |    4       |   V   |   V   |   V   |   V    | confirmed |  PR #15
+|  AD8403  |    4       |   V   |   V   |   V   |   V    | confirmed |  see PR #15
 
 The library is not yet confirmed to work for **AD8402** (2 channels).
 This device has  a very similar interface (datasheet comparison) so it should work. If you can confirm the AD8402 works, please let me know.
@@ -119,7 +119,7 @@ The **selectVSPI()** or the **selectHSPI()** needs to be called BEFORE the **beg
 
 ### Obsolete
 
-- **void powerDown()** OBSOLETE in 0.3.0 => use powerOff() instead.
+- **void powerDown()** OBSOLETE since 0.3.0 => use powerOff() instead.
 
 
 ## Operations
@@ -147,6 +147,7 @@ See examples.
 - **setGroupPercentage(mask, value)** bitmask to set 0..8 channels in one call
   - wrapper
 - move all code to .cpp file ?
+- add changelog.md
 
 #### Could
 

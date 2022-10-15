@@ -129,9 +129,18 @@ See examples.
 
 ## Future
 
+
+#### 0.3.1
+
+- **setGroupValue(mask, value)** bit mask to set 0..8 channels in one call
+  - loop over mask ?
+- **setGroupPercentage(mask, value)** bit mask to set 0..8 channels in one call
+  - wrapper
+- move all code to .cpp file
+
+
 #### Must
 
-- improve testing with hardware
 
 #### Should
 
@@ -142,18 +151,15 @@ See examples.
    - how does this work with **stereo** functions.
    - at what level should invert work.
 - **bool getInvert(uint8_t pm)**
-- **setGroupValue(mask, value)** bitmask to set 0..8 channels in one call
-  - loop over mask ?
-- **setGroupPercentage(mask, value)** bitmask to set 0..8 channels in one call
-  - wrapper
-- move all code to .cpp file ?
-- add changelog.md
 
-#### Could
 
-- **AD520X_MIDDLE_VALUE** 127 ?
+#### Could (only if requested.)
+
+- **AD520X_MIDDLE_VALUE** 127 ?   (0.4.0?)
 - **setSWSPIdelay()** to tune software SPI?
-  - only if requested.
+  - bit delay / not byte delay
+  - unit microseconds
+  
 
 #### Wont
 

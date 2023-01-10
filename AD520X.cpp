@@ -180,7 +180,7 @@ void AD520X::reset(uint8_t value)
 }
 
 
-void AD520X::pmCount()
+uint8_t AD520X::pmCount()
 {
   return _pmCount;
 }

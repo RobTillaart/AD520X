@@ -78,7 +78,7 @@ and value is default the **AD520X_MIDDLE_VALUE** of 128.
 - **void begin(uint8_t value = 128)** value is the initial value of all potentiometer.
 - **void reset(uint8_t value = 128)** resets the device and sets all potentiometers to value, default 128.
 
-#### Value
+### Value
 
 - **bool setValue(uint8_t pm = 0, uint8_t value = 128)** set a potentiometer to a value. 
 Default value is middle value.  
@@ -92,7 +92,7 @@ Can typically be used for **mute**.
 - **setGroupValue(mask, value)** bit mask to set 0..8 channels in one call.
 
 
-#### Percentage
+### Percentage
 
 - **bool setPercentage(uint8_t pm = 0, float percentage = 50)** similar to setValue, percentage from 0..100%  
 Returns true when successful, false if not.
@@ -140,16 +140,12 @@ The **selectVSPI()** or the **selectHSPI()** needs to be called BEFORE the **beg
 - **void powerDown()** OBSOLETE since 0.3.0 => use powerOff() instead.
 
 
-## Operations
-
-See examples.
-
-
 ## Future
 
 
 #### Must
 
+- improve documentation
 
 #### Should
 
@@ -159,9 +155,10 @@ See examples.
 #### Could (only if requested.)
 
 - **AD520X_MIDDLE_VALUE** 127 ?   (0.4.0?)
-- **setSWSPIdelay()** to tune software SPI?
+- **setSWSPIdelay(uint8_t del = 0)** to tune software SPI?
   - bit delay / not byte delay
   - unit microseconds
+  - if (_del) delayMicroseconds(_del/2); // pre and post pulse.
 - **void setInvert(uint8_t pm)** invert flag per potentiometer.
    - 0..255 -> 255..0
    - 1 uint8_t can hold 8 flags
@@ -175,7 +172,7 @@ See examples.
 
 - **void setGamma(uint8_t pm, float gamma)**
   - logarithmic effect? easier with setPercentage()
-  - see gamma library.
+  - see https://github.com/RobTillaart/GAMMA library.
 - **void follow(pm_B, pm_A, float percentage = 100)**
   - makes pm_B follow pm_A unless pm_B is addressed explicitly
   - e.g. to be used for **stereo** channels.

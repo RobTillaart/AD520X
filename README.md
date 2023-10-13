@@ -1,9 +1,12 @@
 
-[![Arduino CI](https://github.com/RobTillaart/AD520X/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
-[![Arduino-lint](https://github.com/RobTillaart/AD520X/actions/workflows/arduino-lint.yml/badge.svg)](https://github.com/RobTillaart/AD520X/actions/workflows/arduino-lint.yml)
-[![JSON check](https://github.com/RobTillaart/AD520X/actions/workflows/jsoncheck.yml/badge.svg)](https://github.com/RobTillaart/AD520X/actions/workflows/jsoncheck.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/AD520X/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/RobTillaart/AD520X.svg?maxAge=3600)](https://github.com/RobTillaart/AD520X/releases)
+[![Arduino CI](https://github.com/RobTillaart/XXXXXXXX/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+[![Arduino-lint](https://github.com/RobTillaart/XXXXXXXX/actions/workflows/arduino-lint.yml/badge.svg)](https://github.com/RobTillaart/XXXXXXXX/actions/workflows/arduino-lint.yml)
+[![JSON check](https://github.com/RobTillaart/XXXXXXXX/actions/workflows/jsoncheck.yml/badge.svg)](https://github.com/RobTillaart/XXXXXXXX/actions/workflows/jsoncheck.yml)
+[![GitHub issues](https://img.shields.io/github/issues/RobTillaart/XXXXXXXX.svg)](https://github.com/RobTillaart/XXXXXXXX/issues)
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/XXXXXXXX/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/RobTillaart/XXXXXXXX.svg?maxAge=3600)](https://github.com/RobTillaart/XXXXXXXX/releases)
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/robtillaart/library/XXXXXXXX.svg)](https://registry.platformio.org/libraries/robtillaart/XXXXXXXX)
 
 
 # AD520X
@@ -34,8 +37,22 @@ The library is not yet confirmed to work for **AD8402** (2 channels).
 This device has  a very similar interface (datasheet comparison) so it should work. If you can confirm the AD8402 works, please let me know.
 
 
+#### Related
+
+- https://github.com/RobTillaart/AD520x
+- https://github.com/RobTillaart/AD524X
+- https://github.com/RobTillaart/AD5245
+- https://github.com/RobTillaart/AD5144A
+- https://github.com/RobTillaart/AD5245
+- https://github.com/RobTillaart/AD5263
+- https://github.com/RobTillaart/X9C10X
+
+
 ## Interface
 
+```cpp
+#include "AD520X.h"
+```
 
 ### Constructors
 
@@ -164,4 +181,13 @@ See examples.
   - e.g. to be used for **stereo** channels.
   - array cascade = 0xFF or pm_A.
   - It will follow pm_A for certain percentage default 100.
+
+
+## Support
+
+If you appreciate my libraries, you can support the development and maintenance.
+Improve the quality of the libraries by providing issues and Pull Requests, or
+donate through PayPal or GitHub sponsors.
+
+Thank you,
 

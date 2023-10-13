@@ -7,8 +7,6 @@
 // PURPOSE: Arduino library for AD5204 and AD5206 digital potentiometers
 //          (+ AD8400, AD8402, AD8403)
 //     URL: https://github.com/RobTillaart/AD520X
-//
-// HISTORY: see CHANGELOG.md
 
 
 #include "Arduino.h"

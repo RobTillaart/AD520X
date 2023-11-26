@@ -3,7 +3,7 @@
 //    FILE: AD520X.h
 //  AUTHOR: Rob Tillaart
 //    DATE: 2020-07-24
-// VERSION: 0.3.2
+// VERSION: 0.4.0
 // PURPOSE: Arduino library for AD5204 and AD5206 digital potentiometers
 //          (+ AD8400, AD8402, AD8403)
 //     URL: https://github.com/RobTillaart/AD520X
@@ -13,17 +13,26 @@
 #include "SPI.h"
 
 
-#define AD520X_LIB_VERSION              (F("0.3.2"))
-
+#define AD520X_LIB_VERSION              (F("0.4.0"))
 
 #ifndef AD520X_MIDDLE_VALUE
 #define AD520X_MIDDLE_VALUE             128
 #endif
 
 
+#if defined(ARDUINO_ARCH_RP2040)
+#define __SPI_CLASS__   SPIClassRP2040
+#else
+#define __SPI_CLASS__   SPIClass
+#endif
+
+
 class AD520X
 {
 public:
+  //  HARDWARE SPI
+  AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, __SPI_CLASS__ * mySPI = &SPI);
+  //  SOFTWARE SPI
   AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock);
 
   void     begin(uint8_t value = AD520X_MIDDLE_VALUE);
@@ -63,18 +72,6 @@ public:
   // debugging
   bool     usesHWSPI();
 
-  // ESP32 specific
-  #if defined(ESP32)
-  void     selectHSPI();
-  void     selectVSPI();
-  bool     usesHSPI();
-  bool     usesVSPI();
-
-  // to overrule ESP32 default hardware pins
-  void     setGPIOpins(uint8_t clk, uint8_t miso, uint8_t mosi, uint8_t select);
-  #endif
-
-
 protected:
   uint8_t  _dataOut;
   uint8_t  _clock;
@@ -90,12 +87,8 @@ protected:
   void     updateDevice(uint8_t pm, uint8_t value);
   void     swSPI_transfer(uint8_t value);
 
-  SPIClass    * mySPI;
-  SPISettings _spi_settings;
-
-  #if defined(ESP32)
-  bool        _useHSPI = true;
-  #endif
+  __SPI_CLASS__ * _mySPI;
+  SPISettings   _spi_settings;
 };
 
 

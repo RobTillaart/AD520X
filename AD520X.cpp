@@ -267,6 +267,13 @@ void AD520X::swSPI_transfer(uint8_t val)
 //
 //  DERIVED CLASSES
 //
+AD5206::AD5206(uint8_t select, uint8_t reset, uint8_t shutdown, __SPI_CLASS__ * mySPI)
+             : AD520X(select, reset, shutdown, mySPI)
+{
+  _pmCount = 6;
+}
+
+
 AD5206::AD5206(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
              : AD520X(select, reset, shutdown, dataOut, clock)
 {
@@ -274,8 +281,22 @@ AD5206::AD5206(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut,
 }
 
 
+AD5204::AD5204(uint8_t select, uint8_t reset, uint8_t shutdown, __SPI_CLASS__ * mySPI)
+             : AD520X(select, reset, shutdown, mySPI)
+{
+  _pmCount = 4;
+}
+
+
 AD5204::AD5204(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
              : AD520X(select, reset, shutdown, dataOut, clock)
+{
+  _pmCount = 4;
+}
+
+
+AD8403::AD8403(uint8_t select, uint8_t reset, uint8_t shutdown, __SPI_CLASS__ * mySPI)
+             : AD520X(select, reset, shutdown, mySPI)
 {
   _pmCount = 4;
 }
@@ -288,6 +309,13 @@ AD8403::AD8403(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut,
 }
 
 
+AD8402::AD8402(uint8_t select, uint8_t reset, uint8_t shutdown, __SPI_CLASS__ * mySPI)
+             : AD520X(select, reset, shutdown, mySPI)
+{
+  _pmCount = 2;
+}
+
+
 AD8402::AD8402(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
              : AD520X(select, reset, shutdown, dataOut, clock)
 {
@@ -295,10 +323,18 @@ AD8402::AD8402(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut,
 }
 
 
+AD8400::AD8400(uint8_t select, uint8_t reset, uint8_t shutdown, __SPI_CLASS__ * mySPI)
+             : AD520X(select, reset, shutdown, mySPI)
+{
+  _pmCount = 1;
+}
+
 AD8400::AD8400(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)
              : AD520X(select, reset, shutdown, dataOut, clock)
 {
   _pmCount = 1;
 }
 
-// -- END OF FILE --
+
+//  -- END OF FILE --
+

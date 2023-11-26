@@ -130,7 +130,7 @@ unittest(test_power)
 }
 
 
-unittest(test_pm_count)
+unittest(test_pm_count_HARDWARE_SPI)
 {
   AD5204 pot1 = AD5204(10, 12, 13);  //  HW SPI by default
   pot1.begin();
@@ -149,6 +149,30 @@ unittest(test_pm_count)
   assertEqual(2, pot4.pmCount());
 
   AD8400 pot5 = AD8400(10, 12, 13);
+  pot5.begin();
+  assertEqual(1, pot5.pmCount());
+}
+
+
+unittest(test_pm_count_SOFTWARE_SPI)
+{
+  AD5204 pot1 = AD5204(10, 12, 13, 6, 7);
+  pot1.begin();
+  assertEqual(4, pot1.pmCount());
+
+  AD5206 pot2 = AD5206(10, 12, 13, 6, 7);
+  pot2.begin();
+  assertEqual(6, pot2.pmCount());
+
+  AD8403 pot3 = AD8403(10, 12, 13, 6, 7);
+  pot3.begin();
+  assertEqual(4, pot3.pmCount());
+
+  AD8402 pot4 = AD8402(10, 12, 13, 6, 7);
+  pot4.begin();
+  assertEqual(2, pot4.pmCount());
+
+  AD8400 pot5 = AD8400(10, 12, 13, 6, 7);
   pot5.begin();
   assertEqual(1, pot5.pmCount());
 }

@@ -36,6 +36,13 @@ The interface is straightforward, one can set a value per channels between 0..25
 The library is not yet confirmed to work for **AD8402** (2 channels).
 This device has  a very similar interface (datasheet comparison) so it should work. If you can confirm the AD8402 works, please let me know.
 
+#### 0.4.0 breaking change
+
+The version 0.4.0 has breaking changes in the interface. 
+The essence is removal of ESP32 specific code from the library. 
+This makes it possible to support the ESP32-S3 and other processors in the future. 
+Also it makes the library a bit simpler to maintain.
+
 
 #### Related
 

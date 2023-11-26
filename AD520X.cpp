@@ -18,10 +18,10 @@ AD520X::AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, __SPI_CLASS__ * 
   _select   = select;
   _reset    = reset;
   _shutdown = shutdown;
-  _hwSPI    = true;
-  _mySPI    = mySPI;
   _dataOut  = 255;
   _clock    = 255;
+  _hwSPI    = true;
+  _mySPI    = mySPI;
 }
 
 //  SOFTWARE SPI

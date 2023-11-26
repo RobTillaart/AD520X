@@ -63,18 +63,19 @@ Also it makes the library a bit simpler to maintain.
 
 ### Constructors
 
-- **AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut = 255, uint8_t clock = 255)** constructor  
+- **AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, SPIClassRP2040 \* mySPI = &SPI)** constructor HW SPI (RP2040 specific)
+- **AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, SPIClass \* mySPI = &SPI)** constructor HW SPI
+- **AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock)** constructor SW SPI
 Base class, not to be used directly.
-If dataOut and clock are set to 255 (default) it uses hardware SPI. 
-If dataOut and clock are set to another (valid) value) it uses software SPI.
-reset and shutdown may be set to 255 too, which effectively disables them.  
-- **AD5204(select, reset, shutdown, dataOut = 255, clock = 255)** has 4 channels.
-- **AD5206(select, reset, shutdown, dataOut = 255, clock = 255)** has 6 channels.
-- **AD8400(select, reset, shutdown, dataOut = 255, clock = 255)** has 1 channel.
-- **AD8402(select, reset, shutdown, dataOut = 255, clock = 255)** has 2 channels.
-- **AD8403(select, reset, shutdown, dataOut = 255, clock = 255)** has 4 channels.
+- **AD5204(select, reset, shutdown, ...)** has 4 channels. As above.
+- **AD5206(select, reset, shutdown, ...)** has 6 channels. As above.
+- **AD8400(select, reset, shutdown, ...)** has 1 channel. As above.
+- **AD8402(select, reset, shutdown, ...)** has 2 channels. As above.
+- **AD8403(select, reset, shutdown, ...)** has 4 channels. As above.
 
-Note: hardware SPI is 10+ times faster on an UNO than software SPI. 
+Note: 
+- hardware SPI is 10+ times faster on an UNO than software SPI.
+- software SPI on ESP32 is about equally fast than hardware SPI.
 
 
 ### Base

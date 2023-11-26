@@ -64,6 +64,14 @@ void AD520X::begin(uint8_t value)
     digitalWrite(_clock,   LOW);
   }
 
+  reset(value);
+}
+
+
+void AD520X::reset(uint8_t value)
+{
+  digitalWrite(_reset, LOW);
+  digitalWrite(_reset, HIGH);
   setAll(value);
 }
 
@@ -171,14 +179,6 @@ void AD520X::setGroupPercentage(uint8_t mask, float percentage)
 //
 //  OTHER
 //
-void AD520X::reset(uint8_t value)
-{
-  digitalWrite(_reset, LOW);
-  digitalWrite(_reset, HIGH);
-  setAll(value);
-}
-
-
 uint8_t AD520X::pmCount()
 {
   return _pmCount;

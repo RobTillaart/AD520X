@@ -36,7 +36,7 @@ public:
   AD520X(uint8_t select, uint8_t reset, uint8_t shutdown, uint8_t dataOut, uint8_t clock);
 
   void     begin(uint8_t value = AD520X_MIDDLE_VALUE);
-
+  void     reset(uint8_t value = AD520X_MIDDLE_VALUE);
 
   //  MONO / SINGLE
   bool     setValue(uint8_t pm = 0, uint8_t value = AD520X_MIDDLE_VALUE);
@@ -57,20 +57,21 @@ public:
   void     setGroupPercentage(uint8_t mask, float percentage);
 
 
-  void     reset(uint8_t value = AD520X_MIDDLE_VALUE);
-  uint8_t  pmCount();
+  //       speed in Hz
+  void     setSPIspeed(uint32_t speed);
+  uint32_t getSPIspeed();
 
+
+  //       MISC
+  uint8_t  pmCount();
   void     powerOn();
   void     powerOff();;
   bool     isPowerOn();
 
 
-  //       speed in Hz
-  void     setSPIspeed(uint32_t speed);
-  uint32_t getSPIspeed();
-
-  // debugging
+  //       Debugging
   bool     usesHWSPI();
+
 
 protected:
   uint8_t  _dataOut;
